@@ -1,13 +1,12 @@
-"use client";
+"use client";  // This is a client component that handles user authentication using Supabase and Google OAuth
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { supabase } from '@/services/supabaseClient';
-// "use client";         // This is a client component that handles user authentication using Supabase and Google OAuth
+import { supabase } from '@/services/supabaseClient';         
 
 function Login() {
 
-    // Function to handle Google sign-in
+  // Function to handle Google sign-in
   // This function is called when the user clicks the "Login with Google" button
   const signInWithGoogle = async () => {
     try {
