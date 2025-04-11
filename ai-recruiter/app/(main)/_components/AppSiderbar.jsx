@@ -10,7 +10,7 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../public/logo.png";
+import logo from "../../../public/logo.jpeg";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { SideBarOptions } from "@/Services/Constants";
 

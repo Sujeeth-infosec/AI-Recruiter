@@ -1,58 +1,70 @@
-"use client";  // This is a client component that handles user authentication using Supabase and Google OAuth
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import { supabase } from '@/services/supabaseClient';         
+"use client";
+import React from "react";
+import Image from "next/image";
+import { supabase } from "@/services/supabaseClient";
 
 function Login() {
-
-  // Function to handle Google sign-in
-  // This function is called when the user clicks the "Login with Google" button
   const signInWithGoogle = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
+        provider: "google",
       });
       if (error) {
-        console.error('Error signing in with Google:', error.message);
+        console.error("Error signing in with Google:", error.message);
       }
     } catch (err) {
-      console.error('Unexpected error:', err);
+      console.error("Unexpected error:", err);
     }
   };
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
-      <div className='flex flex-col items-center border rounded-2xl p-8 shadow-lg bg-white'>
+    <div className="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-400 animate-gradient-x">
+      {/* Background animation overlay */}
+      <div className="absolute inset-0 z-0 animate-pulse bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.1),transparent_60%)]" />
+
+      <div className="relative z-10 bg-white/20 backdrop-blur-2xl border border-white/30 shadow-2xl rounded-3xl px-10 py-12 max-w-md w-full text-center">
         <Image
-          src={'/logo.png'}
-          alt='logo'
-          width={100}
-          height={100}
-          className='w-[180px] rounded-lg'
+          src="/logo.jpeg"
+          alt="AI Recruiter Logo"
+          width={120} // Adjusted width for better visibility
+          height={120} // Adjusted height for better proportions
+          className="mx-auto mb-6 rounded-full border border-gray-300 shadow-md" // Added rounded and shadow styling
         />
-        <div>
-          <div className='flex items-center flex-col'>
-            <Image
-              src={'/login.png'}
-              alt='login'
-              width={600}
-              height={600}
-              className='w-[400px] h-[250px]'
-            />
-            <div className='flex flex-col items-center'>
-              <h2 className='text-2xl font-bold text-center mt-5'>Welcome to Ai-Recruiter</h2>
-              <p className='text-gray-500 text-center'>Please sign in with Google</p>
-              <button
-                className='mt-7 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600'
-                onClick={signInWithGoogle}
-              >
-                Login with Google
-              </button>
-            </div>
-          </div>
-        </div>
+
+        <h2 className="text-3xl font-bold text-white">Welcome to AI-Recruiter</h2>
+        <p className="text-white/80 text-sm mt-2 mb-6">Please sign in with Google to continue</p>
+
+        <Image
+          src="/login.jpg"
+          alt="Login Illustration"
+          width={400}
+          height={200}
+          className="mx-auto mb-6 rounded-lg"
+        />
+
+        <button
+          onClick={signInWithGoogle}
+          className="transition-all duration-300 transform active:scale-95 hover:shadow-lg hover:bg-white/90 bg-white text-blue-600 font-semibold py-2 px-4 rounded-lg w-full"
+        >
+          Login with Google
+        </button>
       </div>
+
+      {/* Tailwind custom animation for gradient */}
+      <style jsx>{`
+        @keyframes gradient-x {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        .animate-gradient-x {
+          background-size: 400% 400%;
+          animation: gradient-x 10s ease infinite;
+        }
+      `}</style>
     </div>
   );
 }
